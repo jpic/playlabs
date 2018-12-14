@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="mui-container">
+==========================================
+|| <h1>Repo name: ||==> {{ object.repo_name }}</h1>
+==========================================<br>
+|| repo source: ||==> <a href="{{ object.src }}">{{ object.src }}</a><br>
+==========================================<br>
+|| repo dest: ||==> <a href="https://github.com/{{object.owner}}/{{ object.repo_name}}">https://github.com/{{object.owner}}/{{ object.repo_name}}</a><br>
+==========================================<br>
+|| repo organisation: ||==> {{ object.org }}<br>
+==========================================<br>
+<h2><a href="{% url 'repo-list' %}">Back to repo</a></h2>
+</div>
+{% endblock %}

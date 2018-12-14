@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="mui-container">
+{% if user.is_authenticated %}
+<h3><a id="create" href="{% url 'repo-create' %}"><button id="button_create" class="mui-btn mui-btn--fab mui-btn--primary">+</button></a> Create new repo</h3>
+
+<ul>
+
+{% for object in object_list %}
+<li>
+	<a class="repolist" href="{% url 'repo-detail' object.pk %}">-> {{ object }} <-</a>
+</li><br>
+{% endfor %}
+<ul>
+{% else %}
+<h1>You should be authenticated for doing that..</h1>
+{% endif %}
+</div>
+{% endblock %}

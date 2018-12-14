@@ -1,0 +1,134 @@
+<html>
+<head>
+    <script>
+    function startTime() 
+    {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('time').innerHTML =
+        h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- load MUI -->
+    <link href="//cdn.muicss.com/mui-0.9.41/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.41/js/mui.min.js"></script>
+    <meta charset="utf-8">
+    <title>Home:wq</title>
+
+
+<style>
+
+#menubar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+}
+
+#mbar {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111111;
+}
+body {
+  background-image: url("http://www.bramptonwomensclinic.com/home/wp-content/uploads/blank2.png");
+  body: 18px;
+}
+
+#time {
+  float: right;
+  margin: 5px;
+  color: #ffff00;
+  right: 80px;
+  font-size: 22px; 
+}
+
+.mui-container {
+        /*width: 780px;*/
+  background: url("https://images.pexels.com/photos/1323712/pexels-photo-1323712.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") ;
+  opacity: 0.88;
+  font-size: 18px;
+     /*height:100%;*/
+    }
+
+.repolist {
+color: darkblue;
+}
+
+.repolist:hover {
+  color: lightgrey;
+}
+
+#button_create {
+  opacity: 1;
+}
+
+pre {
+color: #800080;
+}
+
+</style>
+</head>
+
+<body onload="startTime()">
+    <!-- example content -->
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <ul id="menubar" class="nav navbar-nav">
+            <li><a id="mbar" class="navbar-brand" href="{% url 'index' %}">Gitdecentralizer</a></li>
+            <li><a id="mbar" class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            {% if user.is_authenticated %}
+	        <li><a id="mbar" href="{% url 'repo-list' %}">Repo</a></li>
+            {% else %}
+            <li><a id="mbar" href="{% url 'social:begin' 'github' %}">Login with GitHub</a></li>
+            {% endif %}
+            <div id ="time"></div>
+            </ul>
+      </div>
+      <br><br>
+    <div class="mui-container">
+        <center><pre>    ██╗       ██████╗████████████████╗███████╗         
+    ╚██╗     ██╔════╝██╚══██╔══██╔══██╚══███╔╝         
+█████╚██╗    ██║  █████║  ██║  ██║  ██║ ███╔╝          
+╚════██╔╝    ██║   ████║  ██║  ██║  ██║███╔╝           
+    ██╔╝     ╚██████╔██║  ██║  ██████╔███████╗    ████╗
+    ╚═╝       ╚═════╝╚═╝  ╚═╝  ╚═════╝╚══════╝    ╚═╚═╝</pre></center>
+    </div>
+    <br>
+    <div class="mui-container">
+    {% block body %}
+        {% if user.is_authenticated %}
+        <h1>Welcome {{ user.username }}.</h1>
+        <h2>Go to <a href="{% url 'repo-list' %}">your repo</a>.</h2>
+        {% else %}
+        <h2><a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br></h2>
+        {% endif %}
+    </div>
+    {% endblock %}
+</body>
+</html>

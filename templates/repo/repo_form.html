@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="mui-container">
+<br>
+<form class="mui-form" method="post">
+        {% csrf_token %}
+<div class="mui-textfield">
+<label>Repo Name</label>{{form.repo_name}} </label>
+</div>
+<div class="mui-textfield">
+<label>Repo Source (https only)</label>{{form.src}}</label>
+</div>
+<div class="mui-textfield">
+<label>Repo Org (facultatif)</label>{{form.org}} </label>
+</div>
+Accept the conditions (none) {{form.conditions}} <br>
+<br>Send to Github<br>
+   <input class="mui-btn mui-btn--primary mui-btn--raised" type="submit" />
+</div>
+</form>
+{% else %}
+<div class="mui-container">
+<br>
+<h1>You should be authenticated for doing that..</h1>
+{% endif %}
+{% endblock %}
+
